@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/lucia/static/css/main.8fd852ad.css",
+    "main.js": "/lucia/static/js/main.dab4d64a.js",
+    "static/js/453.0a9f4b6c.chunk.js": "/lucia/static/js/453.0a9f4b6c.chunk.js",
+    "static/media/Logo_color_Charitable_page-0001.jpg": "/lucia/static/media/Logo_color_Charitable_page-0001.ec1474a7677bebc5eefa.jpg",
+    "index.html": "/lucia/index.html",
+    "main.8fd852ad.css.map": "/lucia/static/css/main.8fd852ad.css.map",
+    "main.dab4d64a.js.map": "/lucia/static/js/main.dab4d64a.js.map",
+    "453.0a9f4b6c.chunk.js.map": "/lucia/static/js/453.0a9f4b6c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8fd852ad.css",
+    "static/js/main.dab4d64a.js"
+  ]
+}
