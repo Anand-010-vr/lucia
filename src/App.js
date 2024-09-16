@@ -57,12 +57,50 @@ export default App;*/
 import React, { useState } from 'react';
 import logo from './Logo_color_Charitable_page-0001.jpg';
 import './App.css';
+import emailjs from 'emailjs-com'; // Import EmailJS
 
 function App() {
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
 
   const openLoginModal = () => setLoginModalOpen(true);
   const closeLoginModal = () => setLoginModalOpen(false);
+
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+    
+    emailjs.sendForm(
+      'service_dyg3vrp', // Replace with your EmailJS service ID
+      'template_7yvbtzq', // Replace with your EmailJS template ID
+      e.target,
+      'fXcfSwl7RdA-Hsd5p'      // Replace with your EmailJS user ID
+    )
+    .then((result) => {
+      console.log(result.text);
+      alert('Message sent successfully!');
+    }, (error) => {
+      console.log(error.text);
+      alert('Failed to send message, please try again.');
+    });
+
+    // Clear form
+    setFormData({
+      name: '',
+      email: '',
+      message: ''
+    });
+  };
 
   return (
     <div className="App">
@@ -120,10 +158,30 @@ function App() {
       {/* Contact Section */}
       <section id="contact" className="section contact-section">
         <h2>Get Involved</h2>
-        <form className="contact-form">
-          <input type="text" placeholder="Your Name" required />
-          <input type="email" placeholder="Your Email" required />
-          <textarea placeholder="Your Message" required></textarea>
+        <form className="contact-form" onSubmit={sendEmail}>
+          <input
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            value={formData.name}
+            onChange={handleInputChange}
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Your Email"
+            value={formData.email}
+            onChange={handleInputChange}
+            required
+          />
+          <textarea
+            name="message"
+            placeholder="Your Message"
+            value={formData.message}
+            onChange={handleInputChange}
+            required
+          ></textarea>
           <button type="submit" className="btn send-btn">Send Message</button>
         </form>
       </section>
