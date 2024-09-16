@@ -55,9 +55,9 @@ function App() {
 
 export default App;*/
 import React, { useState } from 'react';
+import emailjs from 'emailjs-com';
 import logo from './Logo_color_Charitable_page-0001.jpg';
 import './App.css';
-import emailjs from 'emailjs-com'; // Import EmailJS
 
 function App() {
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
@@ -70,31 +70,34 @@ function App() {
   const openLoginModal = () => setLoginModalOpen(true);
   const closeLoginModal = () => setLoginModalOpen(false);
 
+  // Handle form input changes
   const handleInputChange = (e) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: value
     });
   };
 
+  // Handle form submission
   const sendEmail = (e) => {
     e.preventDefault();
-    
-    emailjs.sendForm(
-      'service_dyg3vrp', // Replace with your EmailJS service ID
-      'template_7yvbtzq', // Replace with your EmailJS template ID
-      e.target,
-      'fXcfSwl7RdA-Hsd5p'      // Replace with your EmailJS user ID
+
+    emailjs.send(
+      'service_dyg3vrp',     // Replace with your EmailJS service ID
+      'template_7yvbtzq',    // Replace with your EmailJS template ID
+      formData,              // Data to be sent: { name, email, message }
+      'fXcfSwl7RdA-Hsd5p'         // Replace with your EmailJS public key (user ID)
     )
     .then((result) => {
       console.log(result.text);
-      alert('Message sent successfully!');
+      alert('Message successfully sent!');
     }, (error) => {
       console.log(error.text);
-      alert('Failed to send message, please try again.');
+      alert('Failed to send the message. Please try again.');
     });
 
-    // Clear form
+    // Reset form
     setFormData({
       name: '',
       email: '',
